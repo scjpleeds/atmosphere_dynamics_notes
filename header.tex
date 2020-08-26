@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[left=2cm,right=2cm,bottom=2cm,top=1cm]{geometry}
+\usepackage[backend=biber,style=apa,sorting=ynt]{biblatex}
+\usepackage{amsmath,amssymb,amsthm,tcolorbox,fancyhdr,bm,enumitem,empheq,asymptote,standalone,float}
+\renewcommand{\familydefault}{\sfdefault}
+\parindent=0mm
+\parskip=2.5mm
+%%
+\usepackage{biblatex}
+\addbibresource{references.bib}
+%% title page %%% 
+\title{\textbf{\ntitle}}
+\author{Jacob Perez}
+\date{\today}
+
+%%% headers and footers %%%
+\pagestyle{plain}
+
+%%% Environments %%%
+\newtheorem{ques}{Question}
+\newenvironment{question}
+  {\begin{tcolorbox}\begin{ques}}
+  {\end{ques}\end{tcolorbox}}
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{}
+  \begin{proof}[Solution]}
+  {\end{proof}}
+\renewcommand\qedsymbol{}
+
+%%% Commands %%%
+\definecolor{myblue}{rgb}{.8, .8, 1}
+\newcommand*\mybluebox[1]{%
+\colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
+
+\newcommand{\pdev}[3]{\displaystyle \frac{\partial^{#3} #1}{\partial #2^{#3}}}
+\newcommand{\tdev}[3]{\displaystyle \frac{{\rm d}^{#3} #1}{{\rm d} #2^{#3}}}
+\newcommand{\mdev}[1]{\displaystyle \frac{{\rm D} #1}{{\rm D} t}}
+\newcommand{\myint}[4]{\int^{#1}_{#2} {#3}\, {\rm d}#4}
+\newcommand{\uvec}{\bm{u}}
+\newcommand{\ovec}{\bm{\omega}}
+\newcommand{\evalat}{\Bigr|}
+\newcommand{\grad}{\nabla} 
+\newcommand{\diver}{\nabla\cdot} 
+\newcommand{\curl}{\nabla\times} 
+\newcommand{\twocases}[4]{\begin{cases}\displaystyle #1  \quad\text{for}\quad  #2 \\[0.5cm] \displaystyle #3 \quad\text{for}\quad #4 \end{cases}}

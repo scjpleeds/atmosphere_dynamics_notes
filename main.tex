@@ -1,0 +1,385 @@
+\input{header}
+\def\ntitle{Dynamics Notes}
+\begin{document}
+\maketitle
+\begin{abstract}
+    Notes taken from \cite{Vallis2019AtmosphericEdition} and \cite{Holton2015DynamicalOverview} mainly and other sources that will be mentioned. Generally a collection of notes and other things for my phd. 
+\end{abstract}
+\tableofcontents
+\section{Thermodynamics}
+\subsection{Relations} 
+The internal energy of a system in equilibrium is a function of its extensive properties, volume $(V)$, entropy $(S)$, and mass of its constituents. Extensive meaning it is proportional to the amount available. 
+
+From conservation of energy, the internal energy $(I)$ of a body will change due to work done by or on it, heat input or by a change in chemical composition. This can be written in a differential form,
+\begin{equation}
+    \rm{d}I = \underbrace{\delta Q}_\text{Heat input} +\quad \underbrace{\delta W}_\text{Work Done} +\underbrace{\delta C}_\text{Composition}
+\end{equation}
+where anything with a $\delta$ is an inexact differential. Breaking down each of these 
+\begin{itemize}
+    \item Heat input: For an infinitesimal quasi-static or reversible process, if an amount of heat $\delta Q$ is externally supplied the entropy will change according to
+    \begin{gather*}
+        T{\rm d}S=\delta Q.
+    \end{gather*}
+    Changes in entropy by an amount equal to the heat input divided by the temperature. 
+    \item Work done: Work done on a body in a reversible process is equal to the pressure times the change in volume. The work done is positive if the change in volume is negative. Then we have 
+    \begin{gather*}
+        -P{\rm d}V=\delta W
+    \end{gather*}
+    \item Composition: Chemical work is done when a change in the composition is done, this is represented by 
+    \begin{gather*}
+        \mu{\rm d}\eta = \delta C
+    \end{gather*}
+    where $\mu$ is chemical potential. In the atmosphere the composition will vary due to the amount of water vapour present. 
+\end{itemize}
+Bringing this all together we get the \textit{fundamental thermodynamic relation},
+\begin{empheq}[box=\mybluebox]{equation}
+   {\rm d}I = T{\rm d}S - p{\rm d}V + \mu{\rm d}\eta \label{ftr}
+\end{empheq}
+\subsection{Fundamental Equations of state} 
+We can describe the fluid in thermodynamic equilibrium using the two following equations of state 
+\begin{gather*}
+    I = I(S,V,\eta)\quad\text{and}\quad S=S(I,V,\eta).
+\end{gather*}
+If we consider the exact differential of the equations of state we have 
+\begin{gather}
+    {\rm d}I = \left(\pdev{I}{S}{}\right)_{V,\eta}{\rm d}S + \left(\pdev{I}{V}{}\right)_{S,\eta}{\rm d}V + \left(\pdev{I}{\eta}{}\right)_{V,S}{\rm d}\eta\\[0.25cm]
+    {\rm d}S = \left(\pdev{S}{I}{}\right)_{V,\eta}{\rm d}I + \left(\pdev{S}{V}{}\right)_{I,\eta}{\rm d}V + \left(\pdev{S}{\eta}{}\right)_{V,I}{\rm d}\eta
+\end{gather}
+From these expressions and equation \eqref{ftr} we get the following expressions for temperature, pressure and chemical potential 
+\begin{gather*}
+    T=\left(\pdev{I}{S}{}\right)_{V,\eta},\quad p = -\left(\pdev{I}{V}{}\right)_{S,\eta},\quad \mu = \left(\pdev{I}{\eta}{}\right)_{V,S}, \\[0.25cm]
+    T^{-1} = \left(\pdev{S}{I}{}\right)_{V,\eta},\quad p = T\left(\pdev{S}{V}{}\right)_{I,\eta} \quad\text{and}\quad\mu=-T\left(\pdev{S}{\eta}{}\right)_{V,I}.
+\end{gather*}
+Given a fundamental equation of sate the thermodynamics state of the body can be described by any of the two of $\rho,P,T,S,\eta$ and $I$. 
+\subsubsection{State functions}
+\textbf{The internal energy} is the total energy of a body, excluding kinetic and potential energies, due to external fields such as gravity. Internal energy is fixed if the volume does not change and there is no heating or change in composition to the body. 
+\begin{empheq}[box=\mybluebox]{gather*}
+   {\rm d}I = T{\rm d}S - P{\rm d}V + \mu{\rm d}\eta \\[0.25cm]
+   \left(\pdev{T}{V}{}\right)_{S,\eta}=-\left(\pdev{p}{S}{}\right)_{V,\eta}
+\end{empheq}
+\textbf{Enthalpy} $h$, is the energy transfer between the fluid and its environment. If an air parcel is adiabatically displaced, the change in potential energy is accounted for through a change in enthalpy, as it accounts for the work done by the pressure forces. When two adjacent fluid parcels at the same pressure mix, the enthalpy is conserved. 
+\begin{empheq}[box=\mybluebox]{gather*}
+    H = I+PV \\[0.25cm]
+   {\rm d}H = T{\rm d}S + V{\rm d}P + \mu{\rm d}\eta \\[0.25cm]
+   \left(\pdev{T}{P}{}\right)_{S,\eta}=-\left(\pdev{V}{S}{}\right)_{P,\eta}
+\end{empheq}
+
+\textbf{Gibbs function} $G$, is constant for systems at constant pressure, temperature and composition. It is the maximum amount of reversible work by a thermodynamic system with these constraints. Also known as the free enthalpy.  
+\begin{empheq}[box=\mybluebox]{gather*}
+    G = H-TS \\[0.25cm]
+   {\rm d}G = -S{\rm d}T + V{\rm d}P + \mu{\rm d}\eta \\[0.25cm]
+   \left(\pdev{S}{P}{}\right)_{T,\eta}=-\left(\pdev{V}{T}{}\right)_{P,\eta}
+\end{empheq}
+
+\textbf{Helmholtz free energy} $F$, this is useful for systems at constant temperature, density and composition. For small isothermal and isohaline changes, the increase in the free energy is equal to the work done on the system. $F$ is not commonly used in atmospheric and ocean sciences. 
+\begin{empheq}[box=\mybluebox]{gather*}
+    F= I-TS \\[0.25cm]
+   {\rm d}F = -S{\rm d}T - P{\rm d}V + \mu{\rm d}\eta \\[0.25cm]
+   \left(\pdev{S}{V}{}\right)_{T,\eta}=-\left(\pdev{P}{T}{}\right)_{V,\eta}
+\end{empheq}
+\subsection{Thermodynamic Equations for Fluids} 
+With the thermodynamic relations established we want to see how these evolve over time with the motion of a moving fluid. To do this we make two assumptions, 
+\begin{enumerate}
+    \item[(i)] Locally the fluid is in thermodynamic equilibrium. This means that even though things such as $P$ and $T$ vary over space and time, they are varying at such a slow rate that we can use the Maxwells relations and the equations of state discussed before. 
+    \item[(ii)] Large scale motions are reversible and hence not entropy producing. Entropy can still be produced through effects such as viscous dissipation, radiation and conduction but the macroscopic motion does not produce entropy. 
+\end{enumerate}
+Conservation of energy of an infinitesimal fluid parcel may be written as $${\rm d}I=-P{\rm d}V+\delta Q_E,$$
+where $P{\rm d}V$ is the work done and $\delta Q_E$ is the total energy input from heating and changes in composition. Applying the material derivative and using mass continuity we obtain,
+\begin{empheq}[box=\mybluebox]{equation}
+    \mdev{I}+W_d\diver\uvec = \dot{Q}_E
+\end{empheq}
+where $W_d=PV$ and $\dot{Q}_E=\mu\dot{\eta}+\dot{Q}$ is the rate of total energy input per unit mass due to changes in composition and heating. This is the internal energy equation for a fluid. NOte that $I$ is not conservative because of the compressive term $\diver\uvec$. We can write this in terms of the enthalpy
+\begin{empheq}[box=\mybluebox]{equation}
+    \mdev{h}-V\mdev{P}=\dot{Q}_E.
+\end{empheq}
+As a fluid parcel moves its composition is carried a long with it. The composition only changes in the presence of non-conservative sources and sinks, such as diffusive fluxes. The evolution of composition is determined by, 
+\begin{empheq}[box=\mybluebox]{gather*}
+\mdev{\eta}=\dot{\eta} 
+\end{empheq}
+We can also derive the entropy equation from ${\rm d}S$ stated earlier, to get 
+\begin{empheq}[box=\mybluebox]{equation}
+\mdev{S}=\frac{1}{T}\dot{Q}
+\end{empheq}
+where $\dot{Q}$ is the heating rate per unit mass. We can use these two equations for $I$ and $S$ to calculate one or the other since the two are linked as fundamental equations of state. The difficulty in these equations is determining the heating term $\dot{Q}$ as it is effected by gradients of composition, viscosity and radiative fluxes. The internal energy equation is easier to use in multi-component fluids, however the $\diver\uvec$ term affects the internal energy causes difficulties. 
+\subsubsection{Potential temperature and entropy}
+For dry ideal gases $(p=\rho RT , pV= RT)$ the internal energy is only a function of temperature and ${\rm d}I=c{\rm d}T$, where is either specific heat at constant pressure $c_p$ or volume $c_v$. The first law of thermodynamics becomes $$\delta Q = c_v{\rm d}T+p{\rm d}V\qquad\text{or}\qquad \delta Q = c_p{\rm d}T - V{\rm d}p. $$ Forming the material derivative of the left hand expression we obtain 
+\begin{empheq}[box=\mybluebox]{equation}
+c_v\mdev{T} + \frac{p}{\rho}\diver\uvec = \dot{Q}
+\end{empheq}
+As a fluid parcel moves adiabatically through the atmosphere, it will experience changes in pressure through compression and expansion, using $\delta Q=0$, the temperature change is determined by $$c_p{\rm d}T = \frac{1}{\rho}{\rm d}p.$$Potential temperature $\theta$ is the temperature a fluid would have if moved adiabatically with constant composition to some reference pressure $p_R$. We can derive $\theta$ starting with the fundamental thermodynamic relation
+\begin{align*}
+    \delta Q  &= T{\rm d}S\\[0.25cm]
+    \implies T{\rm d}S &= c_p{\rm d}T-V{\rm d}p\\[0.25cm]
+    \implies {\rm d}S  &= \frac{c_p}{T}{\rm d}T - \frac{V}{T}{\rm d}p\\[0.25cm]
+    \implies {\rm d}S  &= c_p{\rm d}\ln T - \frac{R}{p}{\rm d}p \quad\text{(using}\quad pV=RT)\\[0.25cm]
+    \implies {\rm d}S  &= c_p{\rm d}\ln T - R{\rm d}\ln p.
+\end{align*}
+Since the parcels are moving adiabatically, ${\rm d}S=0$, between some pressure $p$ and reference pressure $p_R$ the temperature changes from $T$ to $\theta$,
+\begin{gather*}
+    \myint{\theta}{T}{c_p}{\ln T'} - \myint{p_R}{p}{R}{\ln p'} = 0 \\[0.25cm] 
+    \implies c_p\ln T'\evalat^\theta_T - R\ln p'\evalat^{p_R}_p = 0.
+\end{gather*}
+For a constant $c_p$ and $R$ we get 
+\begin{empheq}[box=\mybluebox]{equation}
+\theta=T\left(\frac{p_R}{p}\right)^\kappa 
+\end{empheq}
+where $\kappa = R/c_p$. From this we can show that $\theta$ is related to $S$ 
+\begin{align*}
+\ln T &= \ln\theta + \kappa(\ln p - \ln p_R) \\[0.25cm]
+\implies \ln T &= \ln \theta +\kappa\ln p - C, \quad (C = \kappa\ln p_R\quad\text{is just a constant)} \\[0.25cm]
+\implies {\rm d}\ln T &= {\rm d}\ln\theta +\kappa{\rm d}\ln p \\[0.25cm]
+\implies c_p{\rm d}\ln\theta &= \underbrace{c_p{\rm d}\ln T - R{\rm d}\ln p}_{{\rm d}S}
+\implies {\rm d}S = c_p{\rm d}\ln\theta.
+\end{align*}
+Integrating this expression, assuming $c_p$ is constant we get 
+\begin{empheq}[box=\mybluebox]{equation}
+S=c_p\ln\theta. 
+\end{empheq}
+Applying the material derivative to this expression we obtain 
+\begin{empheq}[box=\mybluebox]{equation}
+\mdev{\theta} = \frac{\theta}{T}\dot{Q}
+\end{empheq}
+for adiabatic flows we get see that $\theta$ is a conserved quantity. 
+
+\section{Rotating frames of reference and spherical co-ordinates}
+Inertial reference frames are frames that are stationary or with a constant rectilinear velocity (travelling in a straight line). On the surface of the Earth the reference frame is a non-inertial frame of reference since it is spinning around its own axis every 24 hours. We wish to describe flows relative to the Earth's surface, which requires a rotating frame of reference. First to note is that the rate of change of a scalar in an inertial reference frame and a rotating reference frame are the same i.e. $$\tdev{S}{t}{}\evalat_A = \tdev{S}{t}{}\evalat_R.$$ If we now consider a velocity field $\uvec$ in a rotating reference frame the rate at which the rotating frame changes is related by $$\tdev{\bm{i}_R}{t}{}\evalat_A=\tdev{\bm{i}_R}{t}{}\evalat_R+\bm{\Omega}\times\bm{i}_R$$
+where $\bm{\Omega}$ is angular velocity, then the rate of change of the velocity is 
+\begin{empheq}[box=\mybluebox]{equation}
+\tdev{\uvec}{t}{}=\tdev{\uvec}{t}{}+\bm{\Omega}\times\uvec.
+\end{empheq}
+This relates the two frames together as in the limit $\bm{\Omega}\rightarrow 0$ we obtain the result from the inertial frame of reference. 
+
+We now want to develop this idea but for the Lagrangian derivative. The material derivative of the position $\bm{r}$ is the velocity, $$\uvec=\mdev{\bm{r}}+\bm{\Omega}\times\bm{r}=\uvec+\bm{\Omega}\times\bm{r}$$
+then applying the material derivative again we get $$\mdev{\uvec}=\mdev{\uvec}+\bm{\Omega}\times\uvec +\bm{\Omega}\times(\bm{\Omega}\times\uvec)$$ and substituting in the expression for $\uvec$ 
+we get 
+\begin{empheq}[box=\mybluebox]{equation}
+\mdev{\uvec}=\mdev{\uvec}+\underbrace{2\bm{\Omega}\times\uvec}_{\text{Coriolis force}} +\underbrace{\bm{\Omega}\times(\bm{\Omega}\times\bm{r})}_{\text{Centrifugal force}}.
+\end{empheq}
+Transforming the inertial reference frame to a non-inertial rotating frame requires the additional of two 'pseudo' forces the Coriolis and centrifugal force. 
+
+The centrifugal force is only dependent on the position and not on the motion of the fluid parcel. This means that it is a conservative force and hence its curl is 0. With that we can write in terms of a potential $$-\bm{\Omega}\times(\bm{\Omega}\times\bm{r})=\grad\left(\frac{\Omega^2s^2}{2}\right).$$
+The Coriolis force is dependent upon the velocity of the fluid parcel and not of the position. It has a magnitude of $2\Omega U$ and is perpendicular to both $\bm{\Omega}$ and $\uvec$. Assuming the earth is a sphere, the components of the Coriolis force relative to the local vertical direction on the Earths surface, then at latitude $\phi$, $$\bm{\Omega} = \Omega\cos\phi\bm{j}+\Omega\sin\phi\bm{k}.$$ Then $$-2\bm{\Omega}\times\uvec = (2\Omega v\sin\phi - 2\Omega w\cos\phi)\bm{i}-2\Omega u\sin\phi\bm{j}+2\Omega u\cos\phi\bm{k}.$$
+The Coriolis force only acts on non-stationary bodies in a rotating frame and aims to deflect them at right angles to their direction of motion. It does no work on the body because it is perpendicular to the velocity $\uvec\cdot(\bm{\Omega}\times\uvec)=0$.
+
+The Navier-Stokes equations with the new (pseudo) force terms and ignoring viscosity are the following 
+\begin{equation}
+    \mdev{\uvec} = -\frac{1}{\rho}\grad p -2\bm{\Omega}\times\uvec -\grad\Phi,
+\end{equation}
+where $\Phi$ is the sum of the gravitational and the centrifugal forces. Developing this equation further we write the equation in terms of spherical polar co-ordinates described by figure \ref{sphericalpolar}, which results in 
+\begin{empheq}[box=\mybluebox]{gather}
+\mdev{u}-\frac{uv}{r}\tan\theta +\frac{uw}{r}=2\Omega v\sin\theta-2\Omega w\cos\theta-\frac{1}{\rho r\cos\theta}\pdev{p}{\phi}{}\\[0.25cm]
+\mdev{v}+\frac{u^2}{r}\tan\theta+\frac{vw}{r}=-2\Omega u\sin\theta-\frac{1}{\rho r}\pdev{p}{\theta}{}\\[0.25cm]
+\mdev{w}-\frac{u^2+v^2}{r}=2\Omega u\cos\theta-g-\frac{1}{\rho}\pdev{p}{r}{}
+\end{empheq}
+where $\theta$ is the longitude, $\phi$ is the latitude and $r$ is the distance from the centre of the Earth. The velocity $u$ is the zonal wind (East-West) following latitudinal lines , $v$ the meridional wind (North-South) following longitudinal lines and $w$ the vertical wind. 
+
+These equations, the thermodynamic equation and the mass continuity equation are shown here in there full glory. However for the mid latitude weather systems that we are interested in studying some of the terms in these equations can be removed as the magnitude of there effect on the dynamics is small. 
+\begin{figure}[!htp]
+    \centering
+    \input{spherical_coordinates}
+    \caption{Spherical coordinate system - taken from Stack Overflow.}
+    \label{sphericalpolar}
+\end{figure}
+\section{Approximations and Scale analysis}
+\subsection{Reference atmosphere}
+We have to define some base state of the atmosphere that we will refer to as the reference atmosphere. All thermodynamic (pressure, density, temperature and potential temperature) variables in the reference atmosphere (denoted with a subscript $R$) are functions of the height $z$ only. The reference atmosphere obeys the ideal gas law $$p_R=\rho_R R T_R,$$ which can be combined with the hydrostatic approximation to get 
+\begin{gather*}
+    \tdev{p_R}{z}{}=-\frac{g}{RT_R}p_R\\
+    \implies p_R = p_0e^{-z/H}
+\end{gather*}
+where $H=RT_R/g$ is the pressure scaled height which is around 7.5km in the troposphere. If we assume the atmosphere to be isothermal (temperature is constant) we get an identical expressions but the reference pressure is exchanged for the reference density. This assumption however is quite crude and we can obtain a better approximation through combining the hydrostatic approximation and the potential temperature. Taking the logarithm of the definition of potential temperature differentiating w.r.t $z$ we get,
+\begin{gather*} 
+\frac{1}{\theta}\tdev{\theta}{z}{} = \frac{1}{T}\tdev{T}{z}{}-\kappa\tdev{p}{z}{}\\[0.25cm]
+\implies \frac{T}{\theta}\tdev{\theta}{z}{}=\tdev{T}{z}{}+\frac{g}{c_p}
+\end{gather*} 
+this is the adiabatic lapse rate. In a dry atmosphere $\tdev{\theta}{z}{}=0$ and the lapse rate becomes 
+$$\Gamma \equiv -\tdev{T}{z}{}=\frac{g}{c_p}$$
+this is called the dry adiabatic lapse rate  which is constant through out the lower atmosphere. We will return to this when performing scale analysis on the thermodynamic energy equation. 
+
+If we now consider deviations away from the reference atmosphere $p=p_R(z)+p'(x,y,z,t)$ where deviations scale like $\Delta p$ and assume that $|p'|\ll p_R$ then from the ideal gas equation we get scaling's for the deviations,  
+\begin{empheq}[box=\mybluebox]{gather}
+\frac{\Delta p}{\overline{p}_R} \sim \frac{\Delta \rho}{\overline{\rho}_R}+\frac{\Delta T}{\overline{T}_R} \quad\text{or}\quad \frac{\Delta\theta}{\overline{\theta}_R} \sim \frac{\Delta T}{\overline{T}_R}-\kappa\frac{\Delta p}{\overline{p}_R}
+\end{empheq}
+where the overline represents a value for the thermodynamic variable represented across all heights such as the mean. 
+\subsection{Horizontal momentum equations} 
+\subsubsection{Shallow water approximation}
+The shallow water approximation requires that the depth of your region (in our case the tropopause) $D$ but much less than the radius of the earth i.e. $|D/a|\ll1$. Applying this approximation results in dropping the metric terms from our governing equations, resulting in 
+\begin{gather*}
+\mdev{u}-\frac{uv}{a}\tan\phi = fv - \frac{1}{\rho}\pdev{p}{x}{}\\
+\mdev{v}-\frac{u^2}{a}\tan\phi=-fu-\frac{1}{\rho}\pdev{p}{y}{}\\
+\tdev{p}{z}{}=-\rho g.
+\end{gather*}
+Taking the $u$-component of these equations and scaling by the Coriolis force, we obtain the Rossby number $$Ro = \frac{U}{fL}$$ which is the ratio of the acceleration of fluid elements to the Coriolis force. Simply put, $Ro$ measures the importance of rotation in the system you are interested in.
+
+Further simplifying our equations we can assume that the horizontal length scale $L$ is much less than the radius of the Earth (which is typical for a mid latitude weather system), this allows us to remove the curvature terms resulting in,
+\begin{gather*}
+    \mdev{u} = fv - \frac{1}{\rho}\pdev{p}{x}{}\\
+    \mdev{v}=-fu-\frac{1}{\rho}\pdev{p}{y}{}\\
+    \tdev{p}{z}{}=-\rho g.
+\end{gather*}
+If we look at the R.H.S of our horizontal components and for now ignore the evolution, we get a dominant balance between the pressure gradient force and the Coriolis force. Again, applying appropriate scalings we obtain a scale for deviations in pressure $$\Delta p \sim \bar{\rho}_R LfU.$$ Now if we assume the horizontal midlatitude scaling which we can assume that the Corilois force and the density are approximately constant we obtain a very important result, called \textbf{geostrophic balance} 
+\begin{equation}
+    \bm{V_g}=\frac{1}{\rho_0f_0}\bm{k}\times\nabla_Hp.
+\end{equation}
+If we now assume we can write the horizontal components of the flow in terms of a stream function $\bm{V} = \bm{k}\times\nabla\psi$ we obtain the following $$\psi=\frac{p}{\rho_0f_0}.$$ This tells us that the velocity will flow along lines of constant pressure, isobars. But bear in mind that this does not describe any evolution of the flow field in this form. 
+\subsubsection{$\beta$-effect and a spherical Earth}
+Using the shallow water approximation $|D/a|\ll1$ and the the synoptic weather system approximation $|L/a|\ll 1$ we obtain the equations described above with no curvature and no metric terms. If we look at the Coriolis force in more detail, it is defined as the force at some latitude $\phi = \phi_0 + y/a$. Expanding this we get 
+\begin{gather*}
+    f= 2\Omega\sin\phi = 2\Omega\sin(\phi_0+\frac{y}{a}) \\
+    =2\Omega\sin\phi_0\cos\frac{y}{a}+2\Omega\sin\frac{y}{a}\cos\phi_0 \\  
+    \approx 2\Omega\sin\phi_0+2\frac{2\Omega}{a}\cos\phi_0 y \\
+    = f_0 + \beta y
+\end{gather*}
+this is the $\beta$ approximation where we have used the fact that $\sin x\approx x$ for $|x|\ll1$.
+\section{Natural co-ordinates, geostrophic and gradient wind balance}
+In this section we want to understand the dynamics of the geostrophic balance without time evolution. If you take trajectory that is described by two vectors $\bm{n}$ and $\bm{s}$ where $\bm{n}$ points normal to the trajectory, and $\bm{s}$ points a long the direction of motion. Using this we can obtain two equations of motion for each direction,
+\begin{gather*}
+\frac{V^2}{R}+fV=-\frac{1}{\rho}\pdev{p}{n}{} \\
+\mdev{\bm{s}}=\frac{V}{R}\bm{n}
+\end{gather*}
+where $V$ is the velocity and $R$ is the radius of curvature. For $R>0$ the trajectory moves towards the direction of the normal arises in anticlockwise motion, for $R<0$ so moving in direction in the opposite direction of the normal gives clockwise motion. If we make the geostrophic approximation for the evolution of $\bm{n}$ we obtain the following expression 
+\begin{gather*}
+    \frac{1}{R}=\frac{f(V_g-V)}{V^2}
+\end{gather*}
+dividing this by $fV$ we get 
+\begin{gather*}
+    \frac{V}{fR}+1-\frac{V_g}{V}=0
+\end{gather*}
+the first term is a $Ro$ and it is the rate of change in the direction of motion and the second measures the relative strength of the component of geostrophic wind in the direction of the flow. 
+
+\section{Vertical motion}
+Now we turn our attention back to the evolution of the flow. The total wind can be considered as a sum of the geostrophic wind and the non-geostrophic wind, called the ageostrophic wind $$\bm{v}=\bm{v}_g+\bm{v}_a.$$ With this we can write the momentum equations 
+\begin{gather*}
+    \mdev{\bm{v}}=-f_0\bm{k}\times\bm{v}_a.
+\end{gather*}
+Then from this we can obtain a scaling for the ageostrophic wind to be $$U_a\sim RoU.$$ With this we can obtain a scaling for the vertical velocity, we start with the non-divergent nature of the geostrophic wind 
+\begin{gather*}
+    \nabla_H\cdot\bm{v}_g = 0 \\
+    \nabla_H\cdot(\bm{v}-\bm{v}_a)=0\\
+    \nabla_H\cdot\bm{v}_a=-\pdev{w}{z}{}
+\end{gather*}
+then from this we get that $w\sim RoU\left(\displaystyle \frac{D}{L}\right).$
+\subsection{Vertical momentum equation}
+Now splitting the pressure into its background and perturbation we get 
+\begin{gather*}
+    \mdev{w}=-g\frac{\rho'}{\rho}-\frac{1}{\rho}\pdev{p'}{z}{}
+\end{gather*}
+scaling 
+\begin{gather*}
+    \frac{UW}{L} \sim g \frac{\Delta\rho}{\overline{\rho}_R}+\frac{\Delta p}{\overline{\rho}_R D} \\[0.25cm]
+    \frac{D^2}{L^2}Ro^2 \sim \frac{\Delta\rho}{\overline{\rho}_R}\frac{gD}{fUL}+1,
+\end{gather*}
+we get that the term on the L.H.S is very small and the two terms on the R.H.S must balance eachother. Thus we can approximate the vertical velocity as 
+\begin{gather*}
+    \pdev{p'}{z}{}=-g\rho',
+\end{gather*}
+so the deviations in reference atmosphere can be approximated with a hydrostatic approximation, just as the reference atmosphere. With this we can obtain scalings for each deviation 
+\begin{gather*}
+    \frac{\Delta\theta}{\overline{\theta}_R}\sim\frac{\Delta T}{\overline{T}_R}\sim\frac{\Delta\rho}{\overline{\rho}_R}\sim Ro^{-1}Fr
+\end{gather*}
+where the Froude number $Fr=U^2/gD$ is the measure of the kinetic energy of the fluid to a change in potential energy across the depth. 
+\subsection{Mass Continuity} 
+We have the compressible continuity equation, 
+\begin{gather*}
+    \frac{1}{\rho}\mdev{\rho}=-\nabla\cdot\uvec,
+\end{gather*}
+again we split the density into its background and deviational parts and we get,
+\begin{gather*}
+    \frac{1}{\rho}\mdev{\rho'}-w\tdev{\rho_R}{z}{}=-\nabla\cdot\bm{v}-\pdev{w}{z}{}
+\end{gather*}
+where each terms scales like 
+\begin{gather*}
+    \frac{Fr}{Ro^2} + \frac{D}{H} \sim 1 + 1,
+\end{gather*}
+where $H$ is the depth of the troposphere. $FrRo^{-2}$ is typically very small compared to other terms and $D/H$ can be small for shallow systems, but for a deep system is can be of same magnitude of the last two terms. The continuity equation is then,
+\begin{gather*}
+    \nabla\cdot\bm{v}+\pdev{w}{z}{}+\frac{w}{\rho_R}\pdev{\rho_R}{z}{}=0,
+\end{gather*}
+this is the anelastic approximation. If $D\ll H$ then this reduces to the Boussinesq approximation.
+\subsection{Thermodynamic Energy Equation}
+The temperature and potential temperature scaling is given by, 
+\begin{gather*}
+    \frac{\Delta\theta}{\overline{\theta}_R}\sim\frac{\Delta T}{\overline{T}_R}-\kappa\frac{\Delta p}{\overline{p}_R}\sim Ro^{-1}Fr.
+\end{gather*}
+Stratification in the atmosphere is measured by the Brunt-V\"ais\"ala frequency, $$N^2=\frac{g}{\theta}\pdev{\theta}{z}{}$$
+which scales like 
+\begin{gather*}
+    N^2\sim\frac{g}{\theta_0}\frac{\Delta\theta}{H}\sim 10^{-4}s^{-2}.
+\end{gather*}
+Following the usual procedure but for the thermodynamic energy equation, we obtain the following 
+\begin{gather*}
+    \pdev{\theta'}{t}{}+\bm{v}\cdot\nabla_H\theta'+w\tdev{\theta_R}{z}{}+w\pdev{\theta'}{z}{}=S
+\end{gather*}
+and scaling each of these terms we get 
+\begin{gather*}
+    1 + 1 \sim Ro + \frac{N^2D^2}{f^2L^2}\frac{S}{f\overline{\theta}_R}\frac{gD}{U^2},
+\end{gather*}
+from this we extract the Burgers number $$Bu=\frac{N^2D^2}{f^2L^2}$$ which is the ratio of vertical to horizontal advection of $\theta$.
+\subsection{Important scalings for the mid-latitudes} 
+A summary of the important scalings is given in table \ref{scalingstable}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+         Rossby Number & $\displaystyle Ro=\frac{\text{inertia}}{\text{Coriolis}}=\frac{U}{fL}$ \\[0.5cm] \hline
+         Froude Number & $\displaystyle Fr=\frac{\text{K.E}}{\text{P.E depth}}=\frac{U^2}{gD}$ \\[0.5cm] \hline
+         Burger Number & $\displaystyle Bu=\frac{\text{Vertical Advection}}{\text{Horizontal Advection}}=\frac{N^2D^2}{f^2L^2}$\\[0.5cm] \hline
+         Aspect Ratio & $\displaystyle AR=\frac{D}{L}$\\[0.5cm] \hline
+         Vertical velocity scale & $\displaystyle w\sim Ro\frac{D}{L}U$\\[0.5cm]\hline 
+         Horizontal pressure fluctuation & $\displaystyle \Delta p \sim fUL\rho$\\[0.5cm]\hline
+         Potential temperature fluctuation & $\displaystyle\Delta\theta\sim\frac{fUL}{gD}\theta_0$ \\
+         \hline
+    \end{tabular}
+    \caption{Scalings for the mid-latitude}
+    \label{scalingstable}
+\end{table}
+\section{Alternative Vertical co-ordinates} 
+We want to consider other vertical coordinates as the use of $z$ as a vertical coordinate leads to undesirable features, such as 
+\begin{itemize}
+    \item Pressure gradient force is non-linear
+    \item Conservation of mass is complicated if the flow extends over a range of heights such that the mean density at each level changes significantly. 
+    \item All velocity components are important 
+    \item The lower boundary condition is not a coordinate surface, making it difficult to apply numerical schemes to it.
+\end{itemize}
+The goal of this section is to re-write $z$ with any variable that changes monotonically with height, $\zeta$. The general process of changes is the following 
+\begin{itemize}
+    \item Hydrostatic equation, $\pdev{\Phi}{\zeta}{}=-\frac{1}{\rho}\pdev{p}{\zeta}{}$
+    \item Pressure gradient force, $\displaystyle \frac{1}{\rho}\pdev{p}{x}{}\evalat_z = \frac{1}{\rho}\pdev{p}{x}{}\evalat_\zeta+\pdev{\phi}{x}{}\evalat_\zeta$
+    \item Mass conservation $\displaystyle \mdev{r}+r\nabla_\zeta\cdot\uvec=0$ where $\displaystyle r=\rho\pdev{\zeta}{z}{}=-\frac{1}{g}\pdev{p}{\zeta}{}$ is the pseudo density 
+    \item Lagrangian time derivative $\displaystyle \mdev{} = u\pdev{}{x}{}\evalat_\zeta+v\pdev{}{y}{}\evalat_\zeta +\hat{w}\pdev{}{\zeta}{}$, where $\displaystyle \hat{w}=\frac{\rho}{r}w$
+    \item Lower boundary condition, $\mdev{\Phi}=\bm{v}\cdot\grad\Phi^*$ at $z=z^*$
+\end{itemize}
+\subsection{Example: Isobaric Coordinates} 
+If we choose pressure as our vertical coordinate our equations of motion become 
+\begin{gather*}
+    \mdev{\bm{v}}+f\bm{k}\times\bm{v}+\nabla\Phi = \bm{F} \quad \text{(Momentum equations)}\\
+    \pdev{\Phi}{p}{}=-\frac{R}{p}\theta\left(\frac{p}{p_R}\right)^\kappa=-\hat{R}(p)\theta \quad\text{(Linearised pressure gradient}\\
+    \nabla_p\cdot\bm{v}+\pdev{\hat{w}}{p}{}=0 \quad\text{(Mass continuity)}\\
+    \mdev{\theta}=S \quad\text{(Thermodynamic energy equation)} 
+\end{gather*}
+Issues arise with the lower boundary condition, as it is not a coordinate surface but instead it varies with time. The normal assumption, which can be seen after scaling, the first two terms are only relevant for very fast motions of the order 100ms$^{-1}$. The ageostrophic component and the ratio of the second term to $wg$ is $$\max\left(\frac{U^2}{gH},Ro\frac{f^2L^2}{gH}\right).$$ With that, it is normal that the first two terms in the expression are neglected. If you consider a flat surface, where deviations from the reference pressure $p_0$ are typically small so that $p=p_0$, the lower boundary condition, for a flat surface, can be approximated to be $$\hat{w}=0\quad\text{at}\quad p=p_0.$$
+\section{Variations of density and the basic equations} 
+Now we want to look at the density in the pressure gradient term. To do this we need to define a quantity called the 'scale height' $H_Q$, $$H_Q\sim\left(\frac{1}{Q_R}\left|\pdev{Q_R}{z}{}\right|\right)^{-1}.$$
+For constant $H_Q$, this statement says that the quantity $Q$ decreases exponentially with height with a characteristic vertical scale $H_Q$. For example, if we take $Q$ to be pressure and take temperature to be constant, then using the hydrostatic relation $$p_R=p_0e^{-z/H_p},$$ where $\displaystyle H_p=\frac{R T_R}{g}$ is the pressure scaled height. Similar scales can be defined for the temperature, density and potential temperature, 
+\begin{gather*}
+    H_T=-\left(\frac{1}{T_R}\left|\pdev{T_R}{z}{}\right|\right)^{-1},\quad H_\rho=-\left(\frac{1}{\rho_R}\left|\pdev{\rho_R}{z}{}\right|\right)^{-1},\quad H_\theta=\left(\frac{1}{\theta_R}\left|\pdev{\theta_R}{z}{}\right|\right)^{-1}.
+\end{gather*}
+These can be drawn into one relation through the equation of state, resulting in 
+\begin{gather*}
+\frac{1}{H_p}=\frac{1}{H_\rho}+\frac{1}{H_T}, \quad
+\frac{1}{H_\theta}=-\frac{1-\kappa}{H_p}+\frac{1}{H_\rho}.
+\end{gather*}
+Now consider variations to the background states of the pressure and density fields, 
+\begin{gather*}
+    p(x,y,z,t)=p_R(z)+\delta p(x,y,z,t)\\
+    \rho(x,y,z,t)=\rho_R(z)+\delta \rho(x,y,z,t)
+\end{gather*}
+where $|\delta p\ll p_R$ and $|\delta\rho|\ll\rho_R$. Now applying this to the momentum equations, neglecting terms that scale with variations to the background state, only keeping ones that also scale with gravity we get 
+\begin{gather*}
+    \mdev{\uvec}+2\bm{\omega}\times\uvec = \frac{1}{\rho_R}\nabla\delta p - g\frac{\delta p}{\rho_R}\bm{k},
+\end{gather*}
+where we now have a new term in the vertical direction that is called buoyancy. The approximation made here, where we have assumed that density fluctuations are small in comparison to the background state is called a Boussinessq approximation. However, for atmospheric circulation systems the heights spanned are comparable or greater than the density scale height, in which the Boussineq becomes inadequate. So we need something better. 
+\subsection{Anelastic approximation} 
+We proceed as we did before with the Boussinesq approximation, with the decompostion of density into a reference and perturbation, $$\rho = \rho_R(z)+\rho'(x,y,z,t)$$ assuming that $|\rho'|\ll \rho_R$
+\printbibliography 
+\end{document}
